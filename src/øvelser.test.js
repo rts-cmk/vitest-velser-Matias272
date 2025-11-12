@@ -5,31 +5,28 @@ import {
   fetchData,
   validateInput,
   getUserName,
+  calc,
 } from "./øvelser.js";
 import { multiply } from "./extern.js";
 
 // Test med forskellige inputtyper
 describe("processInput", () => {
-  // Testing for null input
   it("should handle null value", () => {
     expect(processInput(null)).toBe("NULL_VALUE");
   });
 
-  // Testing for numbers input
   it("should handle numbers", () => {
     expect(processInput(67)).toBe(67);
     expect(processInput(NaN)).toBe("INVALID_NUMBER");
     expect(processInput(Infinity)).toBe("INFINITE_NUMBER");
   });
 
-  // Testing for strings input
   it("should handle strings", () => {
     expect(processInput("LALALA")).toBe("LALALA");
     expect(processInput("LA LA LA")).toBe("LA LA LA");
     expect(processInput("")).toBe("EMPTY_STRING");
   });
 
-  // Testing for unsupported input
   it("should hanlde unsupported types", () => {
     expect(processInput([])).toBe("UNSUPPORTED_TYPE");
   });
@@ -82,33 +79,57 @@ describe("validateInput()", () => {
 });
 
 // Mock den interne afhængighed
-// apiClient.js
 export async function get(url) {
   const response = await fetch(url);
   return response.json();
 }
-
-// userService.js
 
 export async function getUserName(userId) {
   const data = await get(`https://api.example.com/users/${userId}`);
   return data.name;
 }
 
-// userService.test.js
-import * as apiClient from './extern.js';
+import * as apiClient from "./extern.js";
 
-describe('getUserName', () => {
-  it('returnerer brugernavn fra API', async () => {
-    // Brug vi.spyOn til named exports
-    vi.spyOn(apiClient, 'get').mockResolvedValue({ name: 'Alice' });
-
+describe("getUserName", () => {
+  it("returnerer brugernavn fra API", async () => {
+    vi.spyOn(apiClient, "get").mockResolvedValue({ name: "Alice" });
     const name = await getUserName(1);
-
-    expect(name).toBe('Alice');
-    expect(apiClient.get).toHaveBeenCalledWith('https://api.example.com/users/1');
+    expect(name).toBe("Alice");
+    expect(apiClient.get).toHaveBeenCalledWith(
+      "https://api.example.com/users/1"
+    );
   });
 });
 
+// Testdækning og refaktorering
 
+describe('calc', () => {
+  it('adderer korrekt', () => {
+    expect(calc(2, 3, 'add')).toBe(5)
+  })
 
+  it('subtraherer korrekt', () => {
+    expect(calc(5, 2, 'sub')).toBe(3)
+  })
+
+  it('multiplicerer korrekt', () => {
+    expect(calc(4, 2, 'mul')).toBe(8)
+  })
+
+  it('dividerer korrekt', () => {
+    expect(calc(6, 2, 'div')).toBe(3)
+  })
+
+  it('kaster fejl ved division med nul', () => {
+    expect(() => calc(6, 0, 'div')).toThrow('Division by zero')
+  })
+
+  it('kaster fejl ved ukendt operation', () => {
+    expect(() => calc(2, 3, 'pow')).toThrow('Unknown operation')
+  })
+
+  it('kaster fejl ved ugyldige input', () => {
+    expect(() => calc('a', 3, 'add')).toThrow('Inputs must be numbers')
+  })
+})
