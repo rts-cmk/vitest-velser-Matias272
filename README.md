@@ -1,81 +1,16 @@
-# Øvelser med Vitest
+# React + Vite
 
-Dette sæt øvelser er målrettet elever, der allerede har erfaring med testskrivning i JavaScript. Fokus er på at arbejde med Vitest og styrke forståelsen af testprincipper som struktur, fejlhåndtering, mocking og dækning.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## Øvelse 1: Test med forskellige inputtyper
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-**Opgave:**  
-Skriv tests for en funktion, der håndterer både tal, strenge og null-værdier. Sørg for at dække både gyldige og ugyldige input.
+## React Compiler
 
-**Princip:**  
-Test af grænsetilfælde og inputvariation. Formålet er at sikre, at funktioner reagerer korrekt på forskellige typer input og ikke fejler utilsigtet.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-**Dokumentation:**  
-[Expect API – Vitest](https://vitest.dev/api/expect/)
+## Expanding the ESLint configuration
 
----
-
-## Øvelse 2: Strukturér dine tests med `describe`, `beforeEach` og `afterEach`
-
-**Opgave:**  
-Organisér dine tests i grupper med `describe`. Brug `beforeEach` til at opsætte testdata og `afterEach` til at rydde op.
-
-**Princip:**  
-Teststruktur og gentagelighed. Ved at gruppere og genbruge opsætning undgår man duplikering og får mere overskuelige testfiler.
-
-**Dokumentation:**  
-[Test Context og Lifecycle – Vitest](https://vitest.dev/guide/test-context.html)
-
----
-
-## Øvelse 3: Test af asynkrone funktioner
-
-**Opgave:**  
-Skriv tests for en funktion, der returnerer en Promise. Test både succes og fejltilfælde.
-
-**Princip:**  
-Asynkron testning kræver korrekt håndtering af ventetid og fejl. Det er vigtigt at sikre, at testen venter på resultatet og ikke afsluttes for tidligt.
-
-**Dokumentation:**  
-[Async Tests – Vitest](https://vitest.dev/guide/async.html)
-
----
-
-## Øvelse 4: Test af fejl og undtagelser
-
-**Opgave:**  
-Skriv tests for en funktion, der kaster en fejl ved ugyldigt input. Test at fejlen bliver kastet som forventet.
-
-**Princip:**  
-Fejltestning handler om at sikre, at koden reagerer korrekt i fejltilstande. Det styrker robustheden og gør det lettere at finde bugs.
-
-**Dokumentation:**  
-[Expect toThrow – Vitest](https://vitest.dev/api/expect/#expecttothrow)
-
----
-
-## Øvelse 5: Mocking af afhængigheder
-
-**Opgave:**  
-Skriv tests for en funktion, der bruger en ekstern afhængighed. Brug mocking til at erstatte afhængigheden i testen.
-
-**Princip:**  
-Mocking bruges til at isolere funktioner og undgå sideeffekter. Det gør det muligt at teste logik uden at være afhængig af eksterne moduler.
-
-**Dokumentation:**  
-[Mocking – Vitest](https://vitest.dev/guide/mocking.html)
-
----
-
-## Øvelse 6: Testdækning og refaktorering
-
-**Opgave:**  
-Brug Vitests dækningsoverblik til at finde manglende tests. Tilføj tests, så alle grene i funktionerne bliver dækket. Refaktorér koden og kontroller, at alle tests stadig består.
-
-**Princip:**  
-Testdækning handler om at sikre, at alle relevante dele af koden bliver testet. Refaktorering skal ikke ændre funktionalitet, og tests hjælper med at bevare adfærden.
-
-**Dokumentation:**  
-[Coverage – Vitest](https://vitest.dev/guide/coverage.html)
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
